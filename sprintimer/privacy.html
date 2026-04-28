@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Sprintimer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black: #000; --yellow: #E8C832; --grey: #1a1a1a; --mid: #535353; --white: #fff; }
+    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 24px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #111;
+      background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+    }
+
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--yellow); }
+    .nav-back { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--yellow); }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 140px 48px 80px; }
+
+    .page-label { font-size: 11px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; }
+
+    h1 { font-family: 'Bebas Neue', sans-serif; font-size: 56px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+
+    .updated { font-size: 12px; color: var(--mid); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid #111; }
+
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--yellow); margin: 40px 0 12px; }
+
+    p { font-size: 15px; color: #aaa; line-height: 1.8; margin-bottom: 16px; }
+
+    ul { margin: 0 0 16px 20px; }
+    ul li { font-size: 15px; color: #aaa; line-height: 1.8; margin-bottom: 6px; }
+    ul li strong { color: var(--white); font-weight: 600; }
+
+    a { color: var(--yellow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .accent-line { width: 40px; height: 3px; background: var(--yellow); border-radius: 2px; margin-bottom: 48px; }
+
+    footer { padding: 48px; border-top: 1px solid #111; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--mid); }
+    .footer-logo span { color: var(--yellow); }
+    .footer-copy { font-size: 11px; color: #333; letter-spacing: 1px; }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .container { padding: 100px 24px 60px; }
+      footer { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/"><span>VIRTUO</span> SYSTEMS</a>
+    <a class="nav-back" href="/">← Back</a>
+  </nav>
+
+  <div class="container">
+    <p class="page-label">Sprintimer</p>
+    <h1>PRIVACY POLICY</h1>
+    <p class="updated">Last updated: April 29, 2026</p>
+    <div class="accent-line"></div>
+
+    <p>Virtuo Systems ("we," "us," or "our") built the Sprintimer app. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our app.</p>
+
+    <h2>Information We Collect</h2>
+    <p>When you use Sprintimer, we may collect the following types of information:</p>
+    <ul>
+      <li><strong>Location Data:</strong> We use GPS to measure sprint distance and calculate speed. Location data is used only during an active sprint session and is not stored on our servers or shared with third parties.</li>
+      <li><strong>Motion & Fitness Data:</strong> We use your device's accelerometer to detect reaction time and count steps. This data is processed locally on your device.</li>
+      <li><strong>Profile Information:</strong> If you create an account, we store your name, weight, and unit preferences to personalize your experience and calculate calorie burn.</li>
+      <li><strong>Sprint Data:</strong> Your sprint times, reaction times, top speeds, steps, and calories are stored to show your progress and personal bests.</li>
+    </ul>
+
+    <h2>How We Use Your Information</h2>
+    <ul>
+      <li>To measure and record your sprint performance</li>
+      <li>To calculate calorie burn based on your weight and sprint metrics</li>
+      <li>To display your personal bests and training history</li>
+      <li>To sync your data across devices when you are signed in</li>
+    </ul>
+
+    <h2>Data Storage & Security</h2>
+    <p>Sprint data and profile information for signed-in users is stored securely using Supabase, a trusted database provider. Data is protected using industry-standard encryption in transit and at rest. We do not sell your personal data to third parties.</p>
+    <p>If you use the app without signing in, all data is stored locally on your device only and is not transmitted to our servers.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>Sprintimer uses the following third-party services:</p>
+    <ul>
+      <li><strong>Google Sign-In:</strong> For account authentication. Governed by Google's Privacy Policy.</li>
+      <li><strong>Supabase:</strong> For secure cloud data storage. Governed by Supabase's Privacy Policy.</li>
+      <li><strong>Expo / React Native:</strong> The app framework. No personal data is shared with Expo.</li>
+    </ul>
+
+    <h2>Location Permissions</h2>
+    <p>Sprintimer requests access to your device's location while the app is in use. This permission is used exclusively to measure sprint distance using GPS. We do not track your location in the background, and location data is never shared with third parties or stored on our servers.</p>
+
+    <h2>Data Retention & Deletion</h2>
+    <p>You can delete your account and all associated data at any time from the Profile section of the app. Upon deletion, all your sprint records, profile data, and personal information will be permanently removed from our servers within 30 days.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Sprintimer is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe your child has provided us with personal information, please contact us and we will delete it promptly.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last updated" date at the top of this page. Continued use of the app after any changes constitutes acceptance of the new policy.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:virtuostudios@gmail.com">virtuostudios@gmail.com</a></p>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><span>VIRTUO</span> SYSTEMS</div>
+    <div class="footer-copy">© 2026 Virtuo Systems. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtuo Systems — Mobile Apps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000000;
+      --yellow: #E8C832;
+      --grey: #1a1a1a;
+      --mid: #535353;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #111;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--yellow); }
+
+    nav a.nav-link {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a.nav-link:hover { color: var(--yellow); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-track-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-track-lines::before,
+    .hero-track-lines::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #1a1a1a 20%, #1a1a1a 80%, transparent);
+    }
+
+    .hero-track-lines::before { top: 35%; }
+    .hero-track-lines::after { top: 65%; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 12vw, 160px);
+      line-height: 0.92;
+      letter-spacing: 2px;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-title span { color: var(--yellow); }
+
+    .hero-sub {
+      margin-top: 32px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--mid);
+      max-width: 480px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 2px solid var(--yellow);
+      color: var(--white);
+      background: transparent;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: var(--yellow); color: var(--black); }
+
+    .btn-ghost {
+      border-color: var(--mid);
+      color: var(--mid);
+    }
+
+    .btn-ghost:hover { border-color: var(--white); color: var(--white); background: transparent; }
+
+    /* YELLOW LINE ACCENT */
+    .accent-line {
+      width: 60px;
+      height: 3px;
+      background: var(--yellow);
+      border-radius: 2px;
+    }
+
+    /* APPS SECTION */
+    .section {
+      padding: 120px 48px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 64px;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .app-card {
+      background: var(--grey);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid #222;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .app-card:hover { border-color: #333; transform: translateY(-4px); }
+    .app-card:hover::before { transform: scaleX(1); }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--yellow);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
+
+    .app-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .app-name span { color: var(--yellow); }
+
+    .app-tagline {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .app-status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .status-live { background: rgba(232,200,50,0.15); color: var(--yellow); border: 1px solid rgba(232,200,50,0.3); }
+    .status-soon { background: rgba(83,83,83,0.3); color: var(--mid); border: 1px solid #333; }
+
+    /* ABOUT */
+    .about {
+      padding: 120px 48px;
+      border-top: 1px solid #111;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .about-title span { color: var(--yellow); }
+
+    .about-body {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--yellow);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 48px;
+      border-top: 1px solid #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: var(--mid);
+    }
+
+    .footer-logo span { color: var(--yellow); }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--yellow); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: #333;
+      letter-spacing: 1px;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .section { padding: 80px 24px; }
+      .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/"><span>VIRTUO</span> SYSTEMS</a>
+    <a class="nav-link" href="mailto:virtuostudios@gmail.com">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-track-lines"></div>
+    <p class="hero-eyebrow">Mobile Apps · Dubai & Beyond</p>
+    <h1 class="hero-title">BUILD.<br /><span>SHIP.</span><br />REPEAT.</h1>
+    <p class="hero-sub">Virtuo Systems builds focused, high-performance mobile apps. No bloat. No noise. Just tools that work.</p>
+    <div class="hero-cta">
+      <a href="#apps" class="btn">View Apps</a>
+      <a href="mailto:virtuostudios@gmail.com" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- APPS -->
+  <section class="section" id="apps">
+    <p class="section-label">Our Apps</p>
+    <h2 class="section-title">WHAT WE'VE BUILT</h2>
+    <div class="apps-grid">
+
+      <div class="app-card">
+        <div class="app-icon">⚡</div>
+        <div class="app-name"><span>SPRINT</span>IMER</div>
+        <p class="app-tagline">Professional sprint timing without equipment. Reaction time, top speed, GPS distance tracking, and calorie burn — all from your pocket.</p>
+        <span class="app-status status-live">Live on Android</span>
+      </div>
+
+      <div class="app-card" style="opacity:0.5;">
+        <div class="app-icon" style="background:#1a1a1a; border: 1px solid #333; font-size:20px; color: #535353;">+</div>
+        <div class="app-name" style="color:#535353;">COMING SOON</div>
+        <p class="app-tagline">More apps in development. Check back soon.</p>
+        <span class="app-status status-soon">In Development</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <p class="section-label">About</p>
+      <h2 class="about-title">TOOLS FOR<br /><span>ATHLETES.</span><br />BUILT BY ONE.</h2>
+      <p class="about-body">Virtuo Systems is an independent app studio focused on building precise, no-nonsense tools for athletes and fitness enthusiasts.</p>
+      <p class="about-body">Every app is built with the same philosophy: measure what matters, get out of the way, and let the athlete perform.</p>
+      <div class="accent-line"></div>
+    </div>
+    <div class="stats">
+      <div>
+        <div class="stat-value">1</div>
+        <div class="stat-label">App Live</div>
+      </div>
+      <div>
+        <div class="stat-value">2</div>
+        <div class="stat-label">Platforms</div>
+      </div>
+      <div>
+        <div class="stat-value">0</div>
+        <div class="stat-label">Subscriptions</div>
+      </div>
+      <div>
+        <div class="stat-value">∞</div>
+        <div class="stat-label">Sprints Tracked</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span>VIRTUO</span> SYSTEMS</div>
+    <div class="footer-links">
+      <a href="/sprintimer/privacy">Privacy Policy</a>
+      <a href="mailto:virtuostudios@gmail.com">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 Virtuo Systems. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
