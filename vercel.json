@@ -5,5 +5,6 @@
     { "source": "/sprintimer", "destination": "/sprintimer/index.html" },
     { "source": "/sprintimer/privacy", "destination": "/sprintimer/privacy.html" },
     { "source": "/sprintimer/terms", "destination": "/sprintimer/terms.html" }
+    { "source": "/sprintimer/delete-account", "destination": "/sprintimer/delete-account.html" }
   ]
 }
